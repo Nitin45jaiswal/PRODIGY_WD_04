@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Priya Sharma | Web Developer</title>
+  <style>
+    /* Global Styles */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: radial-gradient(ellipse at top left,#24243e 0%,#302b63 70%,#0f0f1a 100%);
+      color: #e3e7ef;
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+      line-height: 1.7;
+      scroll-behavior: smooth;
+      min-height: 100vh;
+    }
+    nav {
+      position: fixed;
+      width: 100%; top: 0; left: 0;
+      background: rgba(32,36,76,0.92);
+      border-bottom: 2px solid #964efe;
+      z-index: 999;
+      display: flex; justify-content: center; align-items: center;
+      height: 60px;
+    }
+    nav ul {
+      display: flex; list-style: none;
+    }
+    nav ul li { margin: 0 22px; }
+    nav ul li a {
+      color: #e3e7ef; font-weight: 500; font-size: 1.1em;
+      padding-bottom: 4px;
+      text-decoration: none;
+      transition: color .3s, border-bottom .3s;
+    }
+    nav ul li a:hover, nav ul li a.active {
+      color: #964efe;
+      border-bottom: 2px solid #964efe;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      padding-top: 80px;
+      background: linear-gradient(150deg,#964efe 8%,#302b63 60%,#0f0f1a 100%);
+      text-align: center;
+      position: relative;
+      animation: heroFade 1.6s;
+    }
+    @keyframes heroFade {
+      from { opacity: 0; transform: translateY(-80px);}
+      to { opacity: 1; transform: none;}
+    }
+    .profile-img {
+      width: 150px; height: 150px; border-radius: 50%;
+      background: url('https://randomuser.me/api/portraits/women/44.jpg') center/cover;
+      border: 4px solid #964efe;
+      box-shadow: 0 0 40px #964efe;
+      margin-bottom: 28px;
+      animation: profilePop 2s;
+    }
+    @keyframes profilePop {
+      0% { transform: scale(0.7); opacity:0; }
+      80% { transform: scale(1.1);}
+      100% { transform: scale(1); opacity:1;}
+    }
+    .hero h1 {
+      font-size: 2.6em;
+      color: #fff;
+      letter-spacing: .04em;
+      margin-bottom: 8px;
+      text-shadow: 0 0 18px #964efe99;
+      animation: txtFade 2.2s;
+    }
+    .hero h2 {
+      font-size: 1.4em;
+      color: #eed0ff;
+      margin-bottom: 12px;
+      font-weight: 400;
+      animation: txtFade 2.3s;
+    }
+    .hero p {
+      max-width: 510px;
+      color: #e3e7ef;
+      font-size: 1.1em;
+      margin-bottom: 20px;
+      opacity: 0.89;
+      animation: txtFade 2.4s;
+    }
+    @keyframes txtFade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .skills-list {
+      display: flex; gap: 16px; justify-content: center; margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .skill {
+      padding: 8px 18px; background: #302b63;
+      border-radius: 20px;
+      color: #964efe;
+      font-weight: 600;
+      font-size: 1em;
+      box-shadow: 0 0 18px #964efe55;
+      animation: skilldrop 1.7s;
+    }
+    @keyframes skilldrop {
+      from { opacity:0; transform:translateY(-20px);}
+      to { opacity:1; transform:none;}
+    }
+    .btn-main {
+      display: inline-block;
+      margin-top: 28px; padding: 13px 40px;
+      background: linear-gradient(90deg,#964efe 40%,#38a1ee 100%);
+      color: #fff; border: none; border-radius: 30px;
+      box-shadow: 0 0 18px #964efe;
+      font-size: 1.02em; letter-spacing: 0.07em; font-weight: 600;
+      cursor: pointer;
+      transition: background .3s, box-shadow .3s;
+      animation: txtFade 2s;
+    }
+    .btn-main:hover {
+      background:#452aff;
+      box-shadow: 0 0 30px #38a1ee;
+    }
+
+    section {
+      padding: 80px 8%;
+      min-height: 70vh;
+      opacity: 0; transform: translateY(70px) scale(.98);
+      transition: opacity 1s cubic-bezier(.5,0,.2,1), transform 1s cubic-bezier(.5,0,.2,1);
+      will-change: opacity, transform;
+    }
+    section.visible {
+      opacity: 1; transform: none;
+    }
+    section h2 {
+      font-size: 2.1em;
+      color: #964efe;
+      text-align: center;
+      letter-spacing: .04em;
+      margin-bottom: 34px;
+      position: relative;
+    }
+    section h2:after {
+      content:'';
+      display:block;
+      width:42px;height:3px;
+      margin:12px auto 0;
+      border-radius:2px;
+      background: linear-gradient(90deg,#964efe 60%,#38a1ee);
+    }
+    /* About Me */
+    #about p {
+      max-width: 700px; margin: 0 auto 20px auto; color: #e0d8f0;
+      font-size: 1.07em; line-height: 1.8;
+      text-align: center;
+    }
+    .about-details {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;
+      margin-top: 36px;
+    }
+    .about-details > div {
+      background: #302b63;
+      padding: 20px 30px; border-radius: 13px; min-width: 220px;
+      box-shadow: 0 0 18px #964efe22;
+      color: #e1bbe6;
+      font-size: 1.04em;
+    }
+    .about-details h3 { color: #38a1ee; margin-bottom: 10px; }
+
+    /* Projects */
+    #projects-cards {
+      display: flex; flex-wrap: wrap; gap: 28px; justify-content: center; align-items: stretch;
+    }
+    .proj-card {
+      background: #23224b; border-radius: 12px;
+      padding: 24px 18px; width: 310px;
+      text-align: left; box-shadow: 0 0 25px #964efe21;
+      position: relative;
+      opacity: 0; transform: translateY(30px) scale(0.97);
+      transition: opacity 0.9s cubic-bezier(.6,0,.4,1), transform 0.9s cubic-bezier(.6,0,.3,1);
+      will-change: opacity, transform;
+      border: 1.5px solid #302b63;
+      display: flex; flex-direction: column;
+      animation-delay:0.4s;
+    }
+    .proj-card.visible { opacity: 1; transform: none;}
+    .proj-card img {
+      width: 100%; border-radius: 9px; margin-bottom: 16px;
+      box-shadow: 0 0 18px #38a1ee33;
+    }
+    .proj-card h3 { color: #964efe; margin-bottom: 11px;}
+    .proj-card p { color: #dab3ee; font-size: 1em; margin-bottom: 12px; }
+    .proj-link {
+      margin-top: auto;
+      padding: 8px 20px;
+      background: #38a1ee;
+      color: #fff; border-radius: 8px;
+      font-weight: bold;
+      font-size: 1em;
+      text-align: center;
+      box-shadow: 0 0 14px #38a1ee65;
+      transition: background .3s;
+      cursor: pointer;
+    }
+    .proj-link:hover { background: #964efe; }
+
+    /* Contact */
+    #contact-details {
+      text-align: center; margin-bottom: 20px;
+    }
+    #contact-details p {color:#e4daf4; margin: 11px 0;}
+    .socials {
+      margin-top: 15px;
+    }
+    .socials a {
+      margin: 0 14px;
+      font-size: 1.7em;
+      color: #38a1ee;
+      transition: color .3s;
+    }
+    .socials a:hover { color: #964efe; }
+
+    /* Footer */
+    footer {
+      text-align: center; padding: 24px;
+      background: #131327; color: #aaa;
+      font-size: 1em;
+      margin-top: 0;
+    }
+
+    /* Responsive */
+    @media(max-width:900px) {
+      section { padding: 55px 5%; }
+      .about-details { flex-direction: column; gap:10px;}
+      #projects-cards { flex-direction: column; align-items:center;}
+    }
+
+    /* Animated Scroll Reveal */
+    .fade-up { opacity:0; transform:translateY(60px);}
+    .fade-up.visible { opacity:1; transform:none; transition:opacity 0.8s,transform 0.8s;}
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <ul>
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <!-- Hero/Home Section -->
+  <div class="hero" id="home">
+    <div class="profile-img"></div>
+    <h1>Priya Sharma</h1>
+    <h2>Web Developer • Creative Coder • UI Enthusiast</h2>
+    <p>
+      Welcome! I design intriguing digital experiences for the web.<br>
+      My expertise is building beautiful, responsive, performant websites using HTML, CSS, JavaScript, and React.
+    </p>
+    <div class="skills-list">
+      <span class="skill">HTML5</span>
+      <span class="skill">CSS3</span>
+      <span class="skill">JavaScript</span>
+      <span class="skill">React.js</span>
+      <span class="skill">Sass</span>
+      <span class="skill">Figma</span>
+    </div>
+    <a href="#projects" class="btn-main">See My Work</a>
+  </div>
+
+  <!-- About Me -->
+  <section id="about" class="fade-up">
+    <h2>About Me</h2>
+    <p>
+      My passion is transforming ideas into interactive online stories.<br>
+      With a Bachelor’s degree in Computer Science from Delhi University and 3+ years building web platforms, I specialize in modern frontend technology and pixel-perfect design.<br>
+      I love JavaScript frameworks, design systems, and collaborating on creative projects.
+    </p>
+    <div class="about-details">
+      <div>
+        <h3>Education</h3>
+        <ul>
+          <li>BSc Computer Science, Delhi University (2019-22)</li>
+          <li>Certified Web Designer, Udemy (2021)</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Experience</h3>
+        <ul>
+          <li>Frontend Developer, CodeWaves (2022-Present)</li>
+          <li>Intern Web Designer, BrightWeb (2021)</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Expertise</h3>
+        <ul>
+          <li>Responsive design & animation</li>
+          <li>React.js SPA development</li>
+          <li>UI/UX workflows</li>
+          <li>Performance optimization</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="fade-up">
+    <h2>Projects</h2>
+    <div id="projects-cards">
+      <div class="proj-card fade-up">
+        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80" alt="Portfolio site">
+        <h3>Modern Portfolio</h3>
+        <p>Fully responsive personal site with scroll animations and dark mode. Built in React and Sass.</p>
+        <a href="#" class="proj-link" target="_blank">View Demo</a>
+      </div>
+      <div class="proj-card fade-up">
+        <img src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?auto=format&fit=crop&w=400&q=80" alt="Blog platform">
+        <h3>Techie Blog</h3>
+        <p>Content-driven blog with Markdown support and live preview, focused on frontend tutorials.</p>
+        <a href="#" class="proj-link" target="_blank">View Demo</a>
+      </div>
+      <div class="proj-card fade-up">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Game">
+        <h3>Tic-Tac-Toe Neon</h3>
+        <p>Fun and visual neon-inspired game using HTML, CSS, JS. Includes animations for winning moves.</p>
+        <a href="#" class="proj-link" target="_blank">Play Now</a>
+      </div>
+      <div class="proj-card fade-up">
+        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="UI Kit">
+        <h3>UI Components Library</h3>
+        <p>A set of stylish, reusable React components for fast prototyping web apps with custom themes.</p>
+        <a href="#" class="proj-link" target="_blank">Explore UI Kit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="fade-up">
+    <h2>Contact</h2>
+    <div id="contact-details">
+      <p>Want to work with me? Have a question? Let’s connect!</p>
+      <p>
+        <strong>Email:</strong> priya.webdev@email.com<br>
+        <strong>Location:</strong> New Delhi, India
+      </p>
+    </div>
+    <div class="socials">
+      <a href="https://github.com/" target="_blank" title="GitHub">🐙</a>
+      <a href="https://linkedin.com/" target="_blank" title="LinkedIn">🔗</a>
+      <a href="https://twitter.com/" target="_blank" title="Twitter">🐦</a>
+      <a href="mailto:priya.webdev@email.com" title="Email">✉️</a>
+    </div>
+  </section>
+  <footer>
+    <p>© 2025 Priya Sharma | Designed and coded with 💜</p>
+  </footer>
+  <script>
+    // Scroll reveal animation for sections and cards
+    function revealOnScroll() {
+      const reveals = document.querySelectorAll("section, .proj-card");
+      reveals.forEach(element => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+        const revealPoint = 70;
+        if(elementTop < windowHeight - revealPoint) {
+          element.classList.add("visible");
+        }
+      });
+    }
+    window.addEventListener("scroll", revealOnScroll);
+    window.addEventListener("load", () => {
+      revealOnScroll();
+      setTimeout(revealOnScroll, 200);
+    });
+    // Navbar active link highlight
+    const navLinks = document.querySelectorAll("nav ul li a");
+    window.addEventListener("scroll", () => {
+      let current = "";
+      ["home","about","projects","contact"].forEach(id=>{
+        const section = document.getElementById(id);
+        if(section){
+          const sectionTop = section.offsetTop - 80;
+          if(pageYOffset >= sectionTop) { current = id; }
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if(link.getAttribute('href') === "#"+current){ link.classList.add('active'); }
+      });
+    });
+  </script>
+</body>
+</html>
